@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hellenic Cables</title>
     <style>
-        /* Γενικά στυλ */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg'); /* Το URL της εικόνας */
+            background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg'); /* URL της εικόνας */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -20,15 +19,13 @@
             overflow: hidden;
         }
 
-        /* Στυλ για το περιεχόμενο */
         .container {
-            width: 80%; /* Προσαρμοσμένο πλάτος για οριζόντιες οθόνες */
-            max-width: 600px; /* Μπορείς να το προσαρμόσεις */
+            width: 80%;
+            max-width: 600px;
             background-color: rgba(255, 255, 255, 0.8); /* Λευκό με 80% αδιαφάνεια */
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            z-index: 1; /* Για να διασφαλιστεί ότι είναι πάνω από το φόντο */
         }
 
         h2 {
@@ -36,7 +33,7 @@
         }
 
         button {
-            background-color: #003366; /* Σκούρο μπλε χρώμα */
+            background-color: #003366;
             color: white;
             padding: 15px 32px;
             font-size: 16px;
@@ -55,22 +52,28 @@
             background-color: #001433;
         }
 
-        /* Κρύψε την σελίδα σε κατακόρυφο προσανατολισμό */
-        @media (orientation: portrait) {
-            body {
-                display: none; /* Κρύβει τη σελίδα σε κατακόρυφο προσανατολισμό */
-            }
+        /* Σελίδα για κατακόρυφο προσανατολισμό */
+        .portrait-warning {
+            display: none;
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
         }
 
-        /* Ρυθμίσεις για οριζόντιο προσανατολισμό */
-        @media (orientation: landscape) {
-            body {
-                display: flex; /* Εμφανίζει τη σελίδα μόνο σε οριζόντιο προσανατολισμό */
+        @media (orientation: portrait) {
+            .container {
+                display: none;
+            }
+            .portrait-warning {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
+    <div class="portrait-warning">
+        <p>Για να δείτε σωστά την ιστοσελίδα, παρακαλώ περιστρέψτε τη συσκευή σας σε οριζόντιο προσανατολισμό.</p>
+    </div>
     <div class="container">
         <h2>Please choose language!</h2>
         <button onclick="openPDF('gr')">Greek</button>
@@ -88,6 +91,24 @@
                 "ge": "german.pdf"
             };
             window.location.href = pdfLinks[lang];
+        }
+
+        window.addEventListener("orientationchange", function() {
+            if (window.orientation === 0 || window.orientation === 180) {
+                // Κρυφό περιεχόμενο σε κατακόρυφο προσανατολισμό
+                document.querySelector('.container').style.display = 'none';
+                document.querySelector('.portrait-warning').style.display = 'block';
+            } else {
+                // Εμφάνιση περιεχομένου σε οριζόντιο προσανατολισμό
+                document.querySelector('.container').style.display = 'block';
+                document.querySelector('.portrait-warning').style.display = 'none';
+            }
+        });
+
+        // Ελέγχουμε αρχικά τον προσανατολισμό όταν ανοίγει η σελίδα
+        if (window.orientation === 0 || window.orientation === 180) {
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.portrait-warning').style.display = 'block';
         }
     </script>
 </body>
