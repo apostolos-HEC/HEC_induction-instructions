@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hellenic Cables</title>
     <style>
-        /* Εισαγωγή εικόνας φόντου με 90% διαφάνεια */
+        /* Στυλ για το σώμα της σελίδας με εικόνα φόντου */
         body {
             display: flex;
             justify-content: center;
@@ -13,18 +13,30 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg'); /* Το URL της εικόνας */
+            background-image: url('https://raw.githubusercontent.com/username/repositoryname/main/images/yourimage.jpg'); /* Το URL της εικόνας */
             background-size: cover; /* Καλύπτει όλη την οθόνη */
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        /* Κάνουμε το περιεχόμενο πιο διακριτικό με μια ελαφριά σκιά */
+        /* Εφαρμόζουμε 90% διαφάνεια πάνω στην εικόνα με ένα ημιδιαφανές overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.1); /* Μαύρο με 10% αδιαφάνεια (δηλαδή 90% διαφάνεια) */
+            z-index: -1; /* Βάζουμε την overlay πίσω από το περιεχόμενο */
+        }
+
+        /* Κεντρικό πλαίσιο με τα κουμπιά και το κείμενο */
         .container {
-            background-color: rgba(255, 255, 255, 0.9); /* Λευκό με 10% αδιαφάνεια για να βλέπεις την εικόνα */
+            background-color: rgba(255, 255, 255, 0.8); /* Λευκό με 80% αδιαφάνεια */
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+            z-index: 1; /* Διασφαλίζει ότι το περιεχόμενο είναι πάνω από το overlay */
         }
 
         h2 {
@@ -54,6 +66,7 @@
     </style>
 </head>
 <body>
+    <div class="overlay"></div> <!-- Επικάλυψη για τη διαφάνεια στην εικόνα -->
     <div class="container">
         <h2>Please choose language!</h2>
         <button onclick="openPDF('gr')">Greek</button>
@@ -74,4 +87,4 @@
         }
     </script>
 </body>
-<
+</html>
