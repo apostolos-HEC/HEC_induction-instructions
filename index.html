@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Επιλογή Γλώσσας</title>
+</head>
+<body>
+    <h2>Επιλέξτε τη γλώσσα του PDF</h2>
+    <button onclick="openPDF('gr')">Greek</button>
+    <button onclick="openPDF('en')">English</button>
+    <button onclick="openPDF('fr')">French</button>
+	<button onclick="openPDF('ge')">German</button>
+
+    <script>
+        function openPDF(lang) {
+            const pdfLinks = {
+                "gr": "greek.pdf",
+                "en": "english.pdf",
+                "fr": "french.pdf",
+				"ge": "german.pdf"
+            };
+            window.location.href = pdfLinks[lang];
+        }
+    </script>
+</body>
+</html>
