@@ -3,45 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hellenic Cables</title>
+    <title>Hellenic Cables</title> <!-- Ενημερωμένος τίτλος -->
     <style>
+        /* Κεντράρισμα του περιεχομένου */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Παίρνει όλο το ύψος της οθόνης */
+            height: 100vh;
             margin: 0;
-            text-align: center; /* Κεντράρει το κείμενο */
-            flex-direction: column; /* Τα στοιχεία είναι τοποθετημένα κάθετα */
-            font-family: Arial, sans-serif; /* Προαιρετικό: Ορίζει τη γραμματοσειρά */
+            font-family: Arial, sans-serif;
         }
 
         h2 {
-            margin-bottom: 20px; /* Απόσταση κάτω από τον τίτλο */
+            text-align: center;
         }
 
+        /* Στυλ για τα κουμπιά */
         button {
-            margin: 10px; /* Απόσταση μεταξύ των κουμπιών */
-            padding: 10px 20px;
+            background-color: #003366; /* Σκούρο μπλε χρώμα */
+            color: white;
+            padding: 15px 32px;
             font-size: 16px;
-            cursor: pointer; /* Δείκτης του ποντικιού όταν περνάει πάνω από το κουμπί */
-            background-color: #4CAF50; /* Χρώμα φόντου */
-            color: white; /* Χρώμα κειμένου */
-            border: none; /* Καταργεί το περίγραμμα του κουμπιού */
-            border-radius: 5px; /* Στρογγυλεμένες γωνίες */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #45a049; /* Αλλαγή χρώματος όταν περνάς το ποντίκι πάνω από το κουμπί */
+            background-color: #00224d; /* Πολύ σκούρο μπλε όταν το ποντίκι περνά πάνω από το κουμπί */
+        }
+
+        button:active {
+            background-color: #001433; /* Σχεδόν μαύρο μπλε όταν πατηθεί */
         }
     </style>
 </head>
 <body>
-    <h2>Please choose language!</h2>
-    <button onclick="openPDF('gr')">Greek</button>
-    <button onclick="openPDF('en')">English</button>
-    <button onclick="openPDF('fr')">French</button>
-    <button onclick="openPDF('ge')">German</button>
+    <div>
+        <h2>ΠPlease choose language!</h2>
+        <button onclick="openPDF('gr')">Greek</button>
+        <button onclick="openPDF('en')">English</button>
+        <button onclick="openPDF('fr')">French</button>
+        <button onclick="openPDF('ge')">German</button>
+    </div>
 
     <script>
         function openPDF(lang) {
