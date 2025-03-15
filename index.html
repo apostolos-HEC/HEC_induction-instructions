@@ -156,6 +156,9 @@
     </div>
 
     <script>
+        // Προβολή του μηνύματος από την αρχή
+        alert('You are now in landscape mode! Enjoy the optimized view.');
+        
         function openPDF(lang) {
             const pdfLinks = {
                 "gr": "greek.pdf",
@@ -166,21 +169,6 @@
             window.location.href = pdfLinks[lang];
         }
 
-        // Κλείσιμο του μηνύματος μετά από 5 δευτερόλεπτα
-        function closeWarning() {
-            document.querySelector('.portrait-warning').style.display = 'none';
-        }
-
-        // Ορίζουμε το timeout μόνο όταν φορτώσει η σελίδα
-        setTimeout(closeWarning, 5000); 
-
-        // Ενεργοποίηση όταν γίνεται περιστροφή της οθόνης
-        window.addEventListener('orientationchange', function() {
-            if (window.orientation === 90 || window.orientation === -90) {
-                document.querySelector('.portrait-warning').style.display = 'flex';
-                setTimeout(closeWarning, 5000); // Κλείνει το μήνυμα μετά από 5 δευτερόλεπτα
-            }
-        });
     </script>
 </body>
 </html>
