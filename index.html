@@ -74,6 +74,118 @@
             100% { opacity: 1; }
         }
 
+        /* Υπολοιπο στυλ */
+        .container {
+            width: 60%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .flags {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .flag {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .flag:hover {
+            transform: scale(1.1);
+        }
+
+        img {
+            width: 60px;
+            height: auto;
+        }
+
+        /* Προειδοποίηση όταν η συσκευή είναι σε portrait */
+        .portrait-warning {
+            display: none;
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rotate-button {
+            display: none;
+            margin-top: 15px;
+            padding: 15px 30px;
+            background-color: #FF5733;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .rotate-button:hover {
+            background-color: #ff2a00;
+        }
+
+        .rotate-gif {
+            display: none;
+            margin-top: 20px;
+            max-width: 150%;
+            height: auto;
+        }
+
+        @media (orientation: portrait) {
+            .container {
+                display: none;
+            }
+            .portrait-warning {
+                display: flex;
+            }
+            .rotate-button {
+                display: block;
+            }
+            .rotate-gif {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 80%;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            .flags img {
+                width: 50px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -83,6 +195,11 @@
             <p>You are now in landscape mode! Enjoy the optimized view.</p>
             <button class="close" onclick="closeModal()">Close</button>
         </div>
+    </div>
+
+    <div class="portrait-warning">
+        <img class="rotate-gif" src="https://media.giphy.com/media/JOtdkVKp0q8tJ0DGyJ/giphy.gif" alt="Rotate Device">
+        <button class="rotate-button" onclick="alert('Please rotate your device!')">Please rotate your device to landscape mode to view the website correctly.</button>
     </div>
 
     <div class="container">
