@@ -176,6 +176,11 @@
         function closeWarning() {
             document.querySelector('.portrait-warning').style.display = 'none';
         }
+
+        // Αυτομάτως κλείνει το μήνυμα όταν γίνεται αναστροφή προσανατολισμού
+        if (window.orientation === 90 || window.orientation === -90) {
+            setTimeout(closeWarning, 5000);
+        }
     </script>
 </body>
 </html>
