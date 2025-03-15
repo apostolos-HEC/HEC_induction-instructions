@@ -54,21 +54,6 @@
             color: #333;
         }
 
-        .close {
-            background-color: #FF5733;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .close:hover {
-            background-color: #ff2a00;
-        }
-
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
@@ -193,7 +178,6 @@
         <div class="modal-content">
             <h2>Welcome to Landscape Mode!</h2>
             <p>You are now in landscape mode! Enjoy the optimized view.</p>
-            <button class="close" onclick="closeModal()">Close</button>
         </div>
     </div>
 
@@ -215,13 +199,14 @@
     <script>
         // Προβολή του custom modal παραθύρου από την αρχή
         window.onload = function() {
-            document.getElementById('landscapeModal').style.display = 'flex';
-        };
+            const modal = document.getElementById('landscapeModal');
+            modal.style.display = 'flex';
 
-        // Κλείσιμο του modal παραθύρου
-        function closeModal() {
-            document.getElementById('landscapeModal').style.display = 'none';
-        }
+            // Κλείσιμο του modal παραθύρου μετά από 3 δευτερόλεπτα
+            setTimeout(function() {
+                modal.style.display = 'none';
+            }, 3000); // 3000ms = 3 δευτερόλεπτα
+        };
 
         function openPDF(lang) {
             const pdfLinks = {
