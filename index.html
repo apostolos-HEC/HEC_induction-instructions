@@ -59,6 +59,16 @@
             100% { opacity: 1; }
         }
 
+        /* Εφέ fade-out */
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .modal.fade-out {
+            animation: fadeOut 1s forwards; /* Εφαρμόζει το fade-out για 1 δευτερόλεπτο */
+        }
+
         /* Υπολοιπο στυλ */
         .container {
             width: 60%;
@@ -202,9 +212,13 @@
             const modal = document.getElementById('landscapeModal');
             modal.style.display = 'flex';
 
-            // Κλείσιμο του modal παραθύρου μετά από 2 δευτερόλεπτα
+            // Κλείσιμο του modal παραθύρου με fade out μετά από 2 δευτερόλεπτα
             setTimeout(function() {
-                modal.style.display = 'none';
+                modal.classList.add('fade-out'); // Προσθέτουμε την κλάση fade-out
+                // Μετά την ολοκλήρωση του fade-out, το κάνουμε "κρυφό"
+                setTimeout(function() {
+                    modal.style.display = 'none';
+                }, 1000); // Χρειάζεται 1 δευτερόλεπτο για το fade-out να τελειώσει
             }, 2000); // 2000ms = 2 δευτερόλεπτα
         };
 
