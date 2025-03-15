@@ -9,46 +9,14 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg');
-            background-size: cover;
-            background-position: center top;
+            background-size: contain; /* Χρησιμοποιούμε contain για να μην κοπεί η εικόνα */
+            background-position: center;
             background-repeat: no-repeat;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-        }
-
-        .welcome-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            color: white;
-            font-weight: bold;
-            opacity: 1;
-            animation: fadeOut 3s forwards;
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                display: none;
-            }
-        }
-
-        /* Additional styling to handle mobile views */
-        @media (max-width: 600px) {
-            .welcome-message {
-                font-size: 30px;
-            }
         }
 
         .container {
@@ -100,25 +68,14 @@
         .rotate-button {
             display: none;
             margin-top: 15px;
-            padding: 15px 30px;
+            padding: 10px 20px;
             background-color: #FF5733;
             color: white;
             font-size: 18px;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            animation: bounce 1s infinite; /* Εφέ bounce */
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px); /* Μικρή κίνηση προς τα πάνω */
-            }
+            transition: background-color 0.3s ease;
         }
 
         .rotate-button:hover {
@@ -147,7 +104,6 @@
             }
         }
 
-        /* Εδώ προσθέτουμε το @media για μικρές οθόνες */
         @media (max-width: 600px) {
             .container {
                 width: 80%;
@@ -165,13 +121,10 @@
     </style>
 </head>
 <body>
-    <div class="welcome-message">WELCOME</div>
-
     <div class="portrait-warning">
         <img class="rotate-gif" src="https://media.giphy.com/media/JOtdkVKp0q8tJ0DGyJ/giphy.gif" alt="Rotate Device">
         <button class="rotate-button" onclick="alert('Please rotate your device!')">Please rotate your device to landscape mode to view the website correctly.</button>
     </div>
-
     <div class="container">
         <h2>Please choose language!</h2>
         <div class="flags">
@@ -183,6 +136,7 @@
     </div>
 
     <script>
+        // Ανοίγει το κατάλληλο PDF με βάση την επιλεγμένη γλώσσα
         function openPDF(lang) {
             const pdfLinks = {
                 "gr": "greek.pdf",
@@ -192,6 +146,13 @@
             };
             window.location.href = pdfLinks[lang];
         }
+
+        // Παρακολούθηση της αλλαγής προσανατολισμού και εμφάνιση μηνύματος όταν ο χρήστης γυρίζει το κινητό σε landscape
+        window.addEventListener('orientationchange', function() {
+            if (window.orientation === 90 || window.orientation === -90) {
+                alert('You are now in landscape mode! Enjoy the optimized view.');
+            }
+        });
     </script>
 </body>
 </html>
