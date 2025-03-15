@@ -78,7 +78,7 @@
         <h2>Please choose language!</h2>
         <div class="flags">
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg" alt="Greek" onclick="openPDF('gr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_Kingdom.svg" alt="English" onclick="openPDF('en')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="openPDF('en')">
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
         </div>
@@ -92,7 +92,8 @@
                 "fr": "french.pdf",
                 "ge": "german.pdf"
             };
-            window.location.href = pdfLinks[lang];
+            const pdfContainer = document.getElementById("pdfContainer");
+            pdfContainer.innerHTML = `<iframe src="${pdfLinks[lang]}" frameborder="0"></iframe>`;
         }
     </script>
 </body>
