@@ -60,9 +60,17 @@
             font-weight: bold;
             text-align: center;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            z-index: 9999;
         }
 
         .rotate-button {
@@ -129,49 +137,13 @@
                 width: 50px;
             }
         }
-
-        /* Εδώ ορίζουμε το modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            width: 80%;
-            max-width: 400px;
-        }
-
-        .modal-button {
-            background-color: #FF5733;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .modal-button:hover {
-            background-color: #ff2a00;
-        }
     </style>
 </head>
 <body>
     <div class="portrait-warning">
         <img class="rotate-gif" src="https://media.giphy.com/media/JOtdkVKp0q8tJ0DGyJ/giphy.gif" alt="Rotate Device">
-        <button class="rotate-button" onclick="alert('Please rotate your device!')">Please rotate your device to landscape mode to view the website correctly.</button>
+        <p>You are now in landscape mode! Enjoy the optimized view.</p>
+        <button class="rotate-button" onclick="closeWarning()">Got it!</button>
     </div>
     <div class="container">
         <h2>Please choose language!</h2>
@@ -180,15 +152,6 @@
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="openPDF('en')">
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
-        </div>
-    </div>
-
-    <!-- Modal for landscape message -->
-    <div id="landscapeModal" class="modal">
-        <div class="modal-content">
-            <h2>You are now in landscape mode!</h2>
-            <p>Enjoy the optimized view.</p>
-            <button class="modal-button" onclick="closeModal()">Got it!</button>
         </div>
     </div>
 
@@ -203,15 +166,15 @@
             window.location.href = pdfLinks[lang];
         }
 
-        // Παρακολούθηση της αλλαγής προσανατολισμού και εμφάνιση modal
         window.addEventListener('orientationchange', function() {
             if (window.orientation === 90 || window.orientation === -90) {
-                document.getElementById('landscapeModal').style.display = 'flex';
+                document.querySelector('.portrait-warning').style.display = 'flex';
+                setTimeout(closeWarning, 5000); // Κλείνει το μήνυμα μετά από 5 δευτερόλεπτα
             }
         });
 
-        function closeModal() {
-            document.getElementById('landscapeModal').style.display = 'none';
+        function closeWarning() {
+            document.querySelector('.portrait-warning').style.display = 'none';
         }
     </script>
 </body>
