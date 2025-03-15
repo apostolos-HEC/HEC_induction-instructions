@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg');
             background-size: cover;
-            background-position: center top;
+            background-position: center top; /* Τοποθετούμε την εικόνα στο πάνω μέρος */
             background-repeat: no-repeat;
             height: 100vh;
             display: flex;
@@ -18,6 +18,7 @@
             align-items: center;
             overflow: hidden;
         }
+
 
         .container {
             width: 60%;
@@ -49,7 +50,7 @@
         }
 
         img {
-            width: 60px;
+            width: 60px; /* Μικρότερες σημαίες */
             height: auto;
         }
 
@@ -77,7 +78,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            animation: bounce 1s infinite;
+            animation: bounce 1s infinite; /* Εφέ bounce */
         }
         
         @keyframes bounce {
@@ -85,7 +86,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-10px); /* Μικρή κίνηση προς τα πάνω */
             }
         }
 
@@ -115,6 +116,7 @@
             }
         }
 
+        /* Εδώ προσθέτουμε το @media για μικρές οθόνες */
         @media (max-width: 600px) {
             .container {
                 width: 80%;
@@ -126,29 +128,9 @@
             }
 
             .flags img {
-                width: 50px;
+                width: 50px; /* Μειωμένα μεγέθη σημαίας σε κινητά */
             }
         }
-
-        .welcome-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            font-size: 24px;
-            border-radius: 10px;
-            opacity: 1;
-            transition: opacity 2s ease-out;
-            z-index: 1000;
-        }
-
-        .welcome-message.fade-out {
-            opacity: 0;
-        }
-
     </style>
 </head>
 <body>
@@ -166,32 +148,17 @@
         </div>
     </div>
 
-    <div id="welcomeMessage" class="welcome-message" style="display:none;">
-        WELCOME
-    </div>
-
     <script>
-        // Αρχικοποιούμε το QR code scan event
-        function onQRCodeScan() {
-            // Εμφανίζουμε το μήνυμα "WELCOME"
-            const welcomeMessage = document.getElementById('welcomeMessage');
-            welcomeMessage.style.display = 'block';
-
-            // Μετά από 2 δευτερόλεπτα, κάνουμε fade out το μήνυμα
-            setTimeout(() => {
-                welcomeMessage.classList.add('fade-out');
-            }, 2000);
-
-            // Εφόσον το μήνυμα εξαφανιστεί, κάνουμε το redirect
-            setTimeout(() => {
-                window.location.href = "your-redirect-url-here"; // Βάλτε εδώ τη διεύθυνση της κεντρικής σελίδας ή του PDF
-            }, 4000); // Το redirect γίνεται μετά από 4 δευτερόλεπτα για να προλάβει να γίνει το fade out
+        function openPDF(lang) {
+            const pdfLinks = {
+                "gr": "greek.pdf",
+                "en": "english.pdf",
+                "fr": "french.pdf",
+                "ge": "german.pdf"
+            };
+            window.location.href = pdfLinks[lang];
         }
-
-        // Εδώ καλούμε τη συνάρτηση όταν γίνει το σκανάρισμα του QR Code
-        // Αυτή η συνάρτηση θα πρέπει να καλείται με το σκανάρισμα του QR Code.
-        // Αν δεν χρησιμοποιείτε κάποιο QR scanner, μπορείτε να το ενεργοποιήσετε εδώ:
-        // onQRCodeScan();
+        
     </script>
 </body>
 </html>
