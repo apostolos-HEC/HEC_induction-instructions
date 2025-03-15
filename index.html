@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg');
             background-size: cover;
-            background-position: center top; /* Τοποθετούμε την εικόνα στο πάνω μέρος */
+            background-position: center top;
             background-repeat: no-repeat;
             height: 100vh;
             display: flex;
@@ -49,7 +49,7 @@
         }
 
         img {
-            width: 60px; /* Μικρότερες σημαίες */
+            width: 60px;
             height: auto;
         }
 
@@ -77,7 +77,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            animation: bounce 1s infinite; /* Εφέ bounce */
+            animation: bounce 1s infinite;
         }
         
         @keyframes bounce {
@@ -85,7 +85,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px); /* Μικρή κίνηση προς τα πάνω */
+                transform: translateY(-10px);
             }
         }
 
@@ -126,11 +126,10 @@
             }
 
             .flags img {
-                width: 50px; /* Μειωμένα μεγέθη σημαίας σε κινητά */
+                width: 50px;
             }
         }
 
-        /* Εφέ fade-in και fade-out */
         .welcome-message {
             position: fixed;
             top: 50%;
@@ -142,7 +141,8 @@
             font-size: 24px;
             border-radius: 10px;
             opacity: 1;
-            transition: opacity 2s ease-out; /* Εφέ fade-out */
+            transition: opacity 2s ease-out;
+            z-index: 1000;
         }
 
         .welcome-message.fade-out {
@@ -171,8 +171,8 @@
     </div>
 
     <script>
-        // Η συνάρτηση που ανοίγει το PDF και εμφανίζει το μήνυμα "WELCOME"
-        function openPDF(lang) {
+        // Αρχικοποιούμε το QR code scan event
+        function onQRCodeScan() {
             // Εμφανίζουμε το μήνυμα "WELCOME"
             const welcomeMessage = document.getElementById('welcomeMessage');
             welcomeMessage.style.display = 'block';
@@ -184,15 +184,14 @@
 
             // Εφόσον το μήνυμα εξαφανιστεί, κάνουμε το redirect
             setTimeout(() => {
-                const pdfLinks = {
-                    "gr": "greek.pdf",
-                    "en": "english.pdf",
-                    "fr": "french.pdf",
-                    "ge": "german.pdf"
-                };
-                window.location.href = pdfLinks[lang];
+                window.location.href = "your-redirect-url-here"; // Βάλτε εδώ τη διεύθυνση της κεντρικής σελίδας ή του PDF
             }, 4000); // Το redirect γίνεται μετά από 4 δευτερόλεπτα για να προλάβει να γίνει το fade out
         }
+
+        // Εδώ καλούμε τη συνάρτηση όταν γίνει το σκανάρισμα του QR Code
+        // Αυτή η συνάρτηση θα πρέπει να καλείται με το σκανάρισμα του QR Code.
+        // Αν δεν χρησιμοποιείτε κάποιο QR scanner, μπορείτε να το ενεργοποιήσετε εδώ:
+        // onQRCodeScan();
     </script>
 </body>
 </html>
