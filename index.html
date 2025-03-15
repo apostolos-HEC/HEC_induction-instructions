@@ -1,99 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hellenic Cables</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
+    .container {
+        width: 60%;
+        max-width: 400px;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .flags {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .flag {
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .flag:hover {
+        transform: scale(1.1);
+    }
+
+    img {
+        width: 60px; /* Μικρότερες σημαίες */
+        height: auto;
+    }
+
+    .portrait-warning {
+        display: none;
+        color: red;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    @media (orientation: portrait) {
         .container {
-            width: 60%;
-            max-width: 400px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
+            display: none;
+        }
+        .portrait-warning {
+            display: block;
+        }
+    }
+
+    /* Εδώ προσθέτουμε το @media για μικρές οθόνες */
+    @media (max-width: 600px) {
+        .container {
+            width: 80%;
+            padding: 20px;
         }
 
         h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        .flags {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .flag {
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .flag:hover {
-            transform: scale(1.1);
-        }
-
-        img {
-            width: 60px; /* Μικρότερες σημαίες */
-            height: auto;
-        }
-
-        .portrait-warning {
-            display: none;
-            color: red;
             font-size: 16px;
-            font-weight: bold;
         }
 
-        @media (orientation: portrait) {
-            .container {
-                display: none;
-            }
-            .portrait-warning {
-                display: block;
-            }
+        .flags img {
+            width: 50px; /* Μειωμένα μεγέθη σημαίας σε κινητά */
         }
-    </style>
-</head>
-<body>
-    <div class="portrait-warning">
-        <p>To view the website correctly, please rotate your device to landscape mode.</p>
-    </div>
-    <div class="container">
-        <h2>Please choose language!</h2>
-        <div class="flags">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg" alt="Greek" onclick="openPDF('gr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="openPDF('en')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
-        </div>
-    </div>
-
-    <script>
-        function openPDF(lang) {
-            const pdfLinks = {
-                "gr": "greek.pdf",
-                "en": "english.pdf",
-                "fr": "french.pdf",
-                "ge": "german.pdf"
-            };
-            window.location.href = pdfLinks[lang];
-        }
-    </script>
-</body>
-</html>
+    }
+</style>
