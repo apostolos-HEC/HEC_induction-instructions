@@ -158,6 +158,14 @@
             };
             window.location.href = pdfLinks[lang];
         }
+
+        // Παρακολούθηση της αλλαγής προσανατολισμού και εμφάνιση μηνύματος όταν ο χρήστης γυρίζει το κινητό σε landscape
+        window.addEventListener('orientationchange', function() {
+            if (window.orientation === 90 || window.orientation === -90) {
+                alert('You are now in landscape mode! Enjoy the optimized view.');
+            }
+        });
+        
     </script>
 </body>
 </html>
