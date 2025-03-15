@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg'); /* URL της εικόνας */
+            background-image: url('https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/hellenic_cables-003-1140x570.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -22,7 +22,7 @@
         .container {
             width: 80%;
             max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.8); /* Λευκό με 80% αδιαφάνεια */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
@@ -32,27 +32,25 @@
             text-align: center;
         }
 
-        button {
-            background-color: #003366;
-            color: white;
-            padding: 15px 32px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+        .flag-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .flag-container img {
+            width: 80px;
+            height: 50px;
             cursor: pointer;
-            margin: 10px;
-            transition: background-color 0.3s;
+            transition: transform 0.3s;
+            border-radius: 5px;
         }
 
-        button:hover {
-            background-color: #00224d;
+        .flag-container img:hover {
+            transform: scale(1.1);
         }
 
-        button:active {
-            background-color: #001433;
-        }
-
-        /* Σελίδα για κατακόρυφο προσανατολισμό */
         .portrait-warning {
             display: none;
             color: red;
@@ -76,10 +74,12 @@
     </div>
     <div class="container">
         <h2>Please choose language!</h2>
-        <button onclick="openPDF('gr')">Ελληνικά</button>
-        <button onclick="openPDF('en')">English</button>
-        <button onclick="openPDF('fr')">Français</button>
-        <button onclick="openPDF('ge')">Deutsch</button>
+        <div class="flag-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Greece.svg/200px-Flag_of_Greece.svg.png" alt="Greek" onclick="openPDF('gr')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="openPDF('en')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
+            <img src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
+        </div>
     </div>
 
     <script>
@@ -91,24 +91,6 @@
                 "ge": "german.pdf"
             };
             window.location.href = pdfLinks[lang];
-        }
-
-        window.addEventListener("orientationchange", function() {
-            if (window.orientation === 0 || window.orientation === 180) {
-                // Κρυφό περιεχόμενο σε κατακόρυφο προσανατολισμό
-                document.querySelector('.container').style.display = 'none';
-                document.querySelector('.portrait-warning').style.display = 'block';
-            } else {
-                // Εμφάνιση περιεχομένου σε οριζόντιο προσανατολισμό
-                document.querySelector('.container').style.display = 'block';
-                document.querySelector('.portrait-warning').style.display = 'none';
-            }
-        });
-
-        // Ελέγχουμε αρχικά τον προσανατολισμό όταν ανοίγει η σελίδα
-        if (window.orientation === 0 || window.orientation === 180) {
-            document.querySelector('.container').style.display = 'none';
-            document.querySelector('.portrait-warning').style.display = 'block';
         }
     </script>
 </body>
