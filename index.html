@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language Selection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             overflow: hidden;
         }
 
@@ -61,12 +50,6 @@
                 display: block;
             }
         }
-
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
     </style>
 </head>
 <body>
@@ -81,20 +64,17 @@
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
             <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
         </div>
-        <div id="pdfContainer"></div>
     </div>
 
     <script>
         function openPDF(lang) {
             const pdfLinks = {
-                "gr": "https://github.com/yourusername/yourrepository/raw/main/greek.pdf",
-                "en": "https://github.com/yourusername/yourrepository/raw/main/english.pdf",
-                "fr": "https://github.com/yourusername/yourrepository/raw/main/french.pdf",
-                "ge": "https://github.com/yourusername/yourrepository/raw/main/german.pdf"
+                "gr": "greek.pdf",
+                "en": "english.pdf",
+                "fr": "french.pdf",
+                "ge": "german.pdf"
             };
-            
-            const pdfContainer = document.getElementById("pdfContainer");
-            pdfContainer.innerHTML = `<iframe src="${pdfLinks[lang]}" frameborder="0"></iframe>`;
+            window.open(pdfLinks[lang], "_self"); // Ανοίγει το PDF σε νέα καρτέλα
         }
     </script>
 </body>
