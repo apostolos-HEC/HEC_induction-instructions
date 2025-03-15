@@ -166,21 +166,21 @@
             window.location.href = pdfLinks[lang];
         }
 
+        // Κλείσιμο του μηνύματος μετά από 5 δευτερόλεπτα
+        function closeWarning() {
+            document.querySelector('.portrait-warning').style.display = 'none';
+        }
+
+        // Ορίζουμε το timeout μόνο όταν φορτώσει η σελίδα
+        setTimeout(closeWarning, 5000); 
+
+        // Ενεργοποίηση όταν γίνεται περιστροφή της οθόνης
         window.addEventListener('orientationchange', function() {
             if (window.orientation === 90 || window.orientation === -90) {
                 document.querySelector('.portrait-warning').style.display = 'flex';
                 setTimeout(closeWarning, 5000); // Κλείνει το μήνυμα μετά από 5 δευτερόλεπτα
             }
         });
-
-        function closeWarning() {
-            document.querySelector('.portrait-warning').style.display = 'none';
-        }
-
-        // Αυτομάτως κλείνει το μήνυμα όταν γίνεται αναστροφή προσανατολισμού
-        if (window.orientation === 90 || window.orientation === -90) {
-            setTimeout(closeWarning, 5000);
-        }
     </script>
 </body>
 </html>
