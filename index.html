@@ -100,8 +100,18 @@
                 "fr": "https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/french.pdf",
                 "ge": "https://raw.githubusercontent.com/apostolos-HEC/HEC_induction-instructions/main/german.pdf"
             };
+
+            // Αφαίρεση προηγούμενου iframe (αν υπάρχει)
             const pdfContainer = document.getElementById("pdfContainer");
-            pdfContainer.innerHTML = `<iframe src="${pdfLinks[lang]}" frameborder="0"></iframe>`;
+            pdfContainer.innerHTML = "";
+
+            // Δημιουργία νέου iframe και προσθήκη του στο container
+            const iframe = document.createElement("iframe");
+            iframe.src = pdfLinks[lang];
+            iframe.width = "100%";
+            iframe.height = "600px";
+            iframe.frameBorder = "0";
+            pdfContainer.appendChild(iframe);
         }
     </script>
 </body>
