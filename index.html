@@ -19,6 +19,38 @@
             overflow: hidden;
         }
 
+        .welcome-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+            font-weight: bold;
+            opacity: 1;
+            animation: fadeOut 3s forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        /* Additional styling to handle mobile views */
+        @media (max-width: 600px) {
+            .welcome-message {
+                font-size: 30px;
+            }
+        }
+
         .container {
             width: 60%;
             max-width: 400px;
@@ -77,7 +109,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            animation: bounce 1s infinite;
+            animation: bounce 1s infinite; /* Εφέ bounce */
         }
 
         @keyframes bounce {
@@ -85,7 +117,7 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-10px); /* Μικρή κίνηση προς τα πάνω */
             }
         }
 
@@ -98,31 +130,6 @@
             margin-top: 20px;
             max-width: 150%;
             height: auto;
-        }
-
-        .welcome-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            color: white;
-            font-weight: bold;
-            opacity: 1;
-            animation: fadeOut 3s forwards;
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                display: none;
-            }
         }
 
         @media (orientation: portrait) {
@@ -140,6 +147,7 @@
             }
         }
 
+        /* Εδώ προσθέτουμε το @media για μικρές οθόνες */
         @media (max-width: 600px) {
             .container {
                 width: 80%;
@@ -151,18 +159,19 @@
             }
 
             .flags img {
-                width: 50px;
+                width: 50px; /* Μειωμένα μεγέθη σημαίας σε κινητά */
             }
         }
     </style>
 </head>
 <body>
     <div class="welcome-message">WELCOME</div>
-    
+
     <div class="portrait-warning">
         <img class="rotate-gif" src="https://media.giphy.com/media/JOtdkVKp0q8tJ0DGyJ/giphy.gif" alt="Rotate Device">
         <button class="rotate-button" onclick="alert('Please rotate your device!')">Please rotate your device to landscape mode to view the website correctly.</button>
     </div>
+
     <div class="container">
         <h2>Please choose language!</h2>
         <div class="flags">
