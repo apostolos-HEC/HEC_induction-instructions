@@ -19,16 +19,16 @@
             overflow: hidden;
         }
 
-        /* Το modal */
+        /* Το modal παράθυρο που καλύπτει όλη την οθόνη */
         .modal {
-            display: flex;
+            display: none; /* Αρχικά κρυφό */
             position: fixed;
             z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 1);
+            background-color: rgba(255, 255, 255, 1); /* Λευκό background */
             justify-content: center;
             align-items: center;
         }
@@ -59,17 +59,52 @@
             100% { opacity: 1; }
         }
 
-        /* Εφέ εξαφάνισης */
-        .fade-out {
-            animation: fadeOut 1s ease-in-out forwards;
-        }
-
+        /* Εφέ fade-out */
         @keyframes fadeOut {
             0% { opacity: 1; }
             100% { opacity: 0; }
         }
 
-        /* Προειδοποίηση portrait mode */
+        .modal.fade-out {
+            animation: fadeOut 1s forwards; /* Εφαρμόζει το fade-out για 1 δευτερόλεπτο */
+        }
+
+        /* Υπολοιπο στυλ */
+        .container {
+            width: 60%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .flags {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .flag {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .flag:hover {
+            transform: scale(1.1);
+        }
+
+        img {
+            width: 60px;
+            height: auto;
+        }
+
+        /* Προειδοποίηση όταν η συσκευή είναι σε portrait */
         .portrait-warning {
             display: none;
             color: red;
@@ -177,17 +212,14 @@
             const modal = document.getElementById('landscapeModal');
             modal.style.display = 'flex';
 
-            // Κλείσιμο του modal παραθύρου με fade-out μετά από 2 δευτερόλεπτα
+            // Κλείσιμο του modal παραθύρου με fade out μετά από 2 δευτερόλεπτα
             setTimeout(function() {
                 modal.classList.add('fade-out'); // Προσθέτουμε την κλάση fade-out
-
                 // Μετά την ολοκλήρωση του fade-out, το κάνουμε "κρυφό"
                 setTimeout(function() {
                     modal.style.display = 'none';
-                    document.body.style.visibility = 'visible'; // Εμφανίζουμε το υπόλοιπο περιεχόμενο
-                }, 1000); // 1000ms = 1 δευτερόλεπτο (χρονική διάρκεια του fade-out)
+                }, 1000); // Χρειάζεται 1 δευτερόλεπτο για το fade-out να τελειώσει
             }, 2000); // 2000ms = 2 δευτερόλεπτα
-
         };
 
         function openPDF(lang) {
