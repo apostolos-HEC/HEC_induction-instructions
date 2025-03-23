@@ -276,7 +276,22 @@
                 position,
                 company
             };
-            localStorage.setItem('formData', JSON.stringify(formData));
+            // Αποστολή των δεδομένων στο backend server
+            fetch('http://localhost:3000/saveData', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Εδώ μπορείς να ανακατευθύνεις ή να κάνεις άλλες ενέργειες
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
             
             let pdfUrl = '';
             
@@ -295,9 +310,7 @@
             if (pdfUrl) {
                 window.location.href = pdfUrl; // Ανακατεύθυνση στο PDF
             }
-        
-            // Επιβεβαίωση επιτυχίας
-            alert('Form data saved and corresponding PDF opened!');
+
         }
 
         window.onload = function () {
