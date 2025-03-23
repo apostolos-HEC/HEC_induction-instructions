@@ -6,15 +6,15 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Επιτρέπει στο Express να σερβίρει στατικά αρχεία από τον φάκελο "public"
-app.use(express.static(path.join(__dirname, 'public')));
+// Επιτρέπει στο Express να σερβίρει στατικά αρχεία από τον κύριο φάκελο
+app.use(express.static(__dirname));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Διανομή του αρχείου greek.pdf
+// Διανομή του αρχείου greek.pdf από τον main φάκελο
 app.get('/greek.pdf', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'greek.pdf'));
+    res.sendFile(path.join(__dirname, 'greek.pdf'));
 });
 
 // Αποθήκευση των δεδομένων της φόρμας σε αρχείο
