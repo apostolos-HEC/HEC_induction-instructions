@@ -1,29 +1,18 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
+
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Middleware για να χειριζόμαστε JSON δεδομένα
-app.use(express.json());
+// Serve static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname)));
 
-app.post('/saveData', (req, res) => {
-    const formData = req.body; // Τα δεδομένα που στέλνει το frontend
-
-    // Αποθήκευση δεδομένων σε αρχείο .txt
-    const filePath = path.join(__dirname, 'formData.txt');
-    const dataToSave = `First Name: ${formData.firstName}, Last Name: ${formData.lastName}, Position: ${formData.position}, Company: ${formData.company}\n`;
-
-    fs.appendFile(filePath, dataToSave, (err) => {
-        if (err) {
-            console.error('Error writing to file:', err);
-            return res.status(500).send('Server error');
-        }
-        console.log('Data saved');
-        res.status(200).send({ message: 'Data saved successfully!' });
-    });
+// Route for homepage
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
