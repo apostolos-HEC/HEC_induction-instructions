@@ -208,7 +208,7 @@
     <!-- Φόρμα -->
     <div id="formContainer" class="form-container">
         <h2 id="formTitle">Please fill the form</h2>
-        <form>
+        <form id="form" onsubmit="submitForm(event)">
             <input type="text" id="firstName" placeholder="First Name" required>
             <input type="text" id="lastName" placeholder="Last Name" required>
             <input type="text" id="position" placeholder="Position" required>
@@ -218,6 +218,8 @@
     </div>
 
     <script>
+        let selectedLang = '';
+
         function showForm(lang) {
             const formContainer = document.getElementById('formContainer');
             const formTitle = document.getElementById('formTitle');
@@ -226,6 +228,8 @@
             const position = document.getElementById('position');
             const company = document.getElementById('company');
             
+            selectedLang = lang; // Store selected language
+
             formContainer.style.display = 'block';
 
             if (lang === 'gr') {
@@ -254,6 +258,36 @@
                 company.placeholder = "Unternehmen";
             }
         }
+
+        function submitForm(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            let pdfUrl = '';
+            
+            // Map language to the corresponding PDF
+            if (selectedLang === 'gr') {
+                pdfUrl = 'path_to_greek_pdf.pdf'; // Replace with actual path to Greek PDF
+            } else if (selectedLang === 'en') {
+                pdfUrl = 'path_to_english_pdf.pdf'; // Replace with actual path to English PDF
+            } else if (selectedLang === 'fr') {
+                pdfUrl = 'path_to_french_pdf.pdf'; // Replace with actual path to French PDF
+            } else if (selectedLang === 'ge') {
+                pdfUrl = 'path_to_german_pdf.pdf'; // Replace with actual path to German PDF
+            }
+            
+            if (pdfUrl) {
+                window.location.href = pdfUrl; // Redirect to the PDF
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('landscapeModal').style.display = 'flex';
+        };
+
+        // Close modal after 5 seconds
+        setTimeout(function () {
+            document.getElementById('landscapeModal').style.display = 'none';
+        }, 5000);
     </script>
 </body>
 </html>
