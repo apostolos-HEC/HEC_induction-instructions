@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +14,38 @@
             background-repeat: no-repeat;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         .container {
@@ -27,7 +55,6 @@
             padding: 15px;
             border-radius: 10px;
             text-align: center;
-            margin-bottom: 20px;
         }
 
         h2 {
@@ -56,79 +83,114 @@
         }
 
         .form-container {
-            width: 60%;
-            max-width: 400px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
+            margin-top: 20px;
         }
 
-        input {
-            width: calc(100% - 20px);
-            padding: 8px;
-            margin: 8px 0;
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border-radius: 5px;
             border: 1px solid #ccc;
-            border-radius: 5px;
         }
 
-        button {
-            background-color: #003366;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 80%;
+                padding: 20px;
+            }
 
-        button:hover {
-            background-color: #002244;
+            h2 {
+                font-size: 16px;
+            }
+
+            .flags img {
+                width: 50px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Please choose language!</h2>
-        <div class="flags">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg" alt="Greek" onclick="openPDF('gr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="openPDF('en')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
+    <div class="modal" id="landscapeModal">
+        <div class="modal-content">
+            <h2>Welcome to FULGOR!</h2>
+            <p>Safety is number one priority</p>
         </div>
     </div>
 
-    <div class="form-container">
-        <h2>Συμπληρώστε τα στοιχεία σας</h2>
-        <form id="userForm">
-            <label for="name">Όνομα:</label>
-            <input type="text" id="name" name="name" required>
-            <br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <br>
-            <button type="submit">Υποβολή</button>
-        </form>
+    <div class="container">
+        <h2>Please choose language!</h2>
+        <div class="flags">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg" alt="Greek" onclick="changeLanguage('gr')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="changeLanguage('en')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="changeLanguage('fr')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="changeLanguage('ge')">
+        </div>
+
+        <div class="form-container">
+            <h3 id="formTitle">Please fill in your details</h3>
+            <form id="userForm">
+                <label id="nameLabel" for="name">First Name</label>
+                <input type="text" id="name" name="name">
+
+                <label id="surnameLabel" for="surname">Last Name</label>
+                <input type="text" id="surname" name="surname">
+
+                <label id="positionLabel" for="position">Position</label>
+                <input type="text" id="position" name="position">
+
+                <label id="companyLabel" for="company">Company</label>
+                <input type="text" id="company" name="company">
+            </form>
+        </div>
     </div>
 
     <script>
-        document.getElementById("userForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-
-            const response = await fetch("https://your-server-url.com/save-data", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email })
-            });
-
-            if (response.ok) {
-                alert("Τα στοιχεία αποθηκεύτηκαν επιτυχώς!");
-            } else {
-                alert("Υπήρξε πρόβλημα, δοκιμάστε ξανά.");
+        const languageData = {
+            "gr": {
+                "formTitle": "Παρακαλώ συμπληρώστε τα στοιχεία σας",
+                "nameLabel": "Όνομα",
+                "surnameLabel": "Επώνυμο",
+                "positionLabel": "Ιδιότητα",
+                "companyLabel": "Εταιρεία"
+            },
+            "en": {
+                "formTitle": "Please fill in your details",
+                "nameLabel": "First Name",
+                "surnameLabel": "Last Name",
+                "positionLabel": "Position",
+                "companyLabel": "Company"
+            },
+            "fr": {
+                "formTitle": "Veuillez remplir vos coordonnées",
+                "nameLabel": "Prénom",
+                "surnameLabel": "Nom de famille",
+                "positionLabel": "Poste",
+                "companyLabel": "Entreprise"
+            },
+            "ge": {
+                "formTitle": "Bitte füllen Sie Ihre Daten aus",
+                "nameLabel": "Vorname",
+                "surnameLabel": "Nachname",
+                "positionLabel": "Position",
+                "companyLabel": "Unternehmen"
             }
-        });
+        };
+
+        function changeLanguage(lang) {
+            document.getElementById("formTitle").innerText = languageData[lang].formTitle;
+            document.getElementById("nameLabel").innerText = languageData[lang].nameLabel;
+            document.getElementById("surnameLabel").innerText = languageData[lang].surnameLabel;
+            document.getElementById("positionLabel").innerText = languageData[lang].positionLabel;
+            document.getElementById("companyLabel").innerText = languageData[lang].companyLabel;
+        }
     </script>
 </body>
 </html>
