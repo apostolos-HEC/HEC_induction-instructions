@@ -1,18 +1,38 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname)));
+// Επιτρέπει στο Express να σερβίρει στατικά αρχεία από τον φάκελο "public"
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Route for homepage
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Διανομή του αρχείου greek.pdf
+app.get('/greek.pdf', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'greek.pdf'));
 });
 
-// Start server
+// Αποθήκευση των δεδομένων της φόρμας σε αρχείο
+app.post('/save-form', (req, res) => {
+    const formData = JSON.stringify(req.body, null, 2);
+
+    fs.appendFile('formData.txt', formData + '\n', (err) => {
+        if (err) {
+            console.error('Error writing to file:', err);
+            res.status(500).send('Error saving data');
+        } else {
+            console.log('Form data saved');
+            res.send('Form data received');
+        }
+    });
+});
+
+// Εκκίνηση του server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
