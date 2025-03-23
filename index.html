@@ -261,24 +261,43 @@
         }
 
         function submitForm(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); // Αποτρέπει την κανονική υποβολή της φόρμας
+            
+            // Λήψη των δεδομένων της φόρμας
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const position = document.getElementById('position').value;
+            const company = document.getElementById('company').value;
+        
+            // Αποθήκευση των δεδομένων στο Local Storage
+            const formData = {
+                firstName,
+                lastName,
+                position,
+                company
+            };
+            localStorage.setItem('formData', JSON.stringify(formData));
             
             let pdfUrl = '';
             
-            // Map language to the corresponding PDF
+            // Αντιστοίχιση της γλώσσας στο αντίστοιχο PDF
             if (selectedLang === 'gr') {
-                pdfUrl = 'greek.pdf'; // Replace with actual path to Greek PDF
+                pdfUrl = 'greek.pdf'; // Αντικατέστησε με την πραγματική διαδρομή του PDF στα ελληνικά
             } else if (selectedLang === 'en') {
-                pdfUrl = 'english.pdf'; // Replace with actual path to English PDF
+                pdfUrl = 'english.pdf'; // Αντικατέστησε με την πραγματική διαδρομή του PDF στα αγγλικά
             } else if (selectedLang === 'fr') {
-                pdfUrl = 'french.pdf'; // Replace with actual path to French PDF
+                pdfUrl = 'french.pdf'; // Αντικατέστησε με την πραγματική διαδρομή του PDF στα γαλλικά
             } else if (selectedLang === 'ge') {
-                pdfUrl = 'german.pdf'; // Replace with actual path to German PDF
+                pdfUrl = 'german.pdf'; // Αντικατέστησε με την πραγματική διαδρομή του PDF στα γερμανικά
             }
-            
+        
+            // Αν βρεθεί URL για το PDF, άνοιξε το PDF σε νέο παράθυρο
             if (pdfUrl) {
-                window.location.href = pdfUrl; // Redirect to the PDF
+                window.location.href = pdfUrl; // Ανακατεύθυνση στο PDF
             }
+        
+            // Επιβεβαίωση επιτυχίας
+            alert('Form data saved and corresponding PDF opened!');
         }
 
         window.onload = function () {
