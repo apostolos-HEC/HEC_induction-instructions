@@ -58,15 +58,6 @@
             100% { opacity: 1; }
         }
 
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        .modal.fade-out {
-            animation: fadeOut 1s forwards;
-        }
-
         .container {
             width: 60%;
             max-width: 400px;
@@ -101,6 +92,40 @@
             height: auto;
         }
 
+        /* Για τη φόρμα */
+        .form-container {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #050780;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #ff2a00;
+        }
+
+        /* Ενδεικτική ετικέτα για warning σε portrait mode */
         .portrait-warning {
             display: none;
             color: red;
@@ -125,23 +150,6 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .rotate-button:hover {
-            background-color: #ff2a00;
-        }
-
-        .rotate-gif {
-            display: none;
-            margin-top: 20px;
-            max-width: 150%;
-            height: auto;
         }
 
         @media (orientation: portrait) {
@@ -152,9 +160,6 @@
                 display: flex;
             }
             .rotate-button {
-                display: block;
-            }
-            .rotate-gif {
                 display: block;
             }
         }
@@ -173,30 +178,6 @@
                 width: 50px;
             }
         }
-
-        /* Στυλ για τη φόρμα */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        input[type="text"], input[type="email"], input[type="submit"] {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="submit"] {
-            background-color: #050780;
-            color: white;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #ff2a00;
-        }
     </style>
 </head>
 <body>
@@ -208,50 +189,67 @@
     </div>
 
     <div class="portrait-warning">
-        <img class="rotate-gif" src="https://media.giphy.com/media/JOtdkVKp0q8tJ0DGyJ/giphy.gif" alt="Rotate Device">
         <button class="rotate-button" onclick="alert('Please rotate your device!')">Please rotate your device to landscape mode to view the website correctly.</button>
     </div>
 
     <div class="container">
         <h2>Please choose language!</h2>
         <div class="flags">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg" alt="Greek" onclick="openPDF('gr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="openPDF('en')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="openPDF('fr')">
-            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="openPDF('ge')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Greece.svg" alt="Greek" onclick="showForm('gr')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/a/a4/Flag_of_the_United_States.svg" alt="English" onclick="showForm('en')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="French" onclick="showForm('fr')">
+            <img class="flag" src="https://upload.wikimedia.org/wikipedia/en/b/ba/Flag_of_Germany.svg" alt="German" onclick="showForm('ge')">
         </div>
+    </div>
 
-        <!-- Φόρμα Εισαγωγής Στοιχείων -->
+    <!-- Φόρμα -->
+    <div id="formContainer" class="form-container">
+        <h2 id="formTitle">Please fill the form</h2>
         <form>
-            <input type="text" id="firstname" placeholder="Ονομα" required>
-            <input type="text" id="lastname" placeholder="Επωνυμο" required>
-            <input type="text" id="role" placeholder="Ιδιοτητα" required>
-            <input type="text" id="company" placeholder="Εταιρεια" required>
-            <input type="submit" value="Υποβολή">
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <input type="text" id="lastName" placeholder="Last Name" required>
+            <input type="text" id="position" placeholder="Position" required>
+            <input type="text" id="company" placeholder="Company" required>
+            <button type="submit">Submit</button>
         </form>
     </div>
 
     <script>
-        window.onload = function() {
-            const modal = document.getElementById('landscapeModal');
-            modal.style.display = 'flex';
+        function showForm(lang) {
+            const formContainer = document.getElementById('formContainer');
+            const formTitle = document.getElementById('formTitle');
+            const firstName = document.getElementById('firstName');
+            const lastName = document.getElementById('lastName');
+            const position = document.getElementById('position');
+            const company = document.getElementById('company');
+            
+            formContainer.style.display = 'block';
 
-            setTimeout(function() {
-                modal.classList.add('fade-out');
-                setTimeout(function() {
-                    modal.style.display = 'none';
-                }, 1000);
-            }, 2000);
-        };
-
-        function openPDF(lang) {
-            const pdfLinks = {
-                "gr": "greek.pdf",
-                "en": "english.pdf",
-                "fr": "french.pdf",
-                "ge": "german.pdf"
-            };
-            window.location.href = pdfLinks[lang];
+            if (lang === 'gr') {
+                formTitle.textContent = "Παρακαλώ συμπληρώστε τη φόρμα";
+                firstName.placeholder = "Όνομα";
+                lastName.placeholder = "Επώνυμο";
+                position.placeholder = "Ιδιότητα";
+                company.placeholder = "Εταιρεία";
+            } else if (lang === 'en') {
+                formTitle.textContent = "Please fill the form";
+                firstName.placeholder = "First Name";
+                lastName.placeholder = "Last Name";
+                position.placeholder = "Position";
+                company.placeholder = "Company";
+            } else if (lang === 'fr') {
+                formTitle.textContent = "Veuillez remplir le formulaire";
+                firstName.placeholder = "Prénom";
+                lastName.placeholder = "Nom de famille";
+                position.placeholder = "Poste";
+                company.placeholder = "Entreprise";
+            } else if (lang === 'ge') {
+                formTitle.textContent = "Bitte füllen Sie das Formular aus";
+                firstName.placeholder = "Vorname";
+                lastName.placeholder = "Nachname";
+                position.placeholder = "Position";
+                company.placeholder = "Unternehmen";
+            }
         }
     </script>
 </body>
